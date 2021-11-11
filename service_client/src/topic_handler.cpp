@@ -9,9 +9,11 @@ using namespace std;
 
 void topic_handle (const std_msgs::Float32MultiArray::ConstPtr& topic_array)
 {
-  if (sizeof topic_array->data == 0)
+  if ((sizeof (topic_array->data)) / (sizeof (float)) == 2)
   {
-    ROS_INFO("No real roots");
+    ROS_INFO ("X1 = %f, X2 = %f",
+    topic_array->data[0],
+    topic_array->data[1]);
     return;
   }
   if ((sizeof (topic_array->data)) / (sizeof (float)) == 1)
@@ -19,9 +21,7 @@ void topic_handle (const std_msgs::Float32MultiArray::ConstPtr& topic_array)
     ROS_INFO("X = %f", topic_array->data[0]);
     return;
   }
-  ROS_INFO ("X1 = %f, X2 = %f",
-  topic_array->data[0],
-  topic_array->data[1]);
+  ROS_INFO("No real roots");
   return;
 }
 
